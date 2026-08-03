@@ -1,0 +1,21 @@
+{{ define "main" }}
+<main class="reading">
+  <article class="pane">
+    <h2 class="pane__title">{{ .Section }}</h2>
+    <h1 class="post__title">{{ .Title }}</h1>
+    <div class="post__meta">
+      {{ .Date | time.Format "2 January 2006" }} · {{ .ReadingTime }} min read
+    </div>
+    <div class="prose">
+      {{ .Content }}
+    </div>
+  </article>
+</main>
+
+<nav class="status">
+  <span class="status__session">noam</span>
+  <a class="status__win" href="/">0:home</a>
+  <a class="status__win is-active" href="/posts/">1:writing</a>
+  <span class="status__right"><span>israel</span></span>
+</nav>
+{{ end }}

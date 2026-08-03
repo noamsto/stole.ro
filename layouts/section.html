@@ -1,0 +1,25 @@
+{{ define "main" }}
+<main class="reading">
+  <section class="pane is-active">
+    <h2 class="pane__title">writing</h2>
+    {{ range .Pages.ByDate.Reverse }}
+    <div class="row">
+      <div class="row__main">
+        <div class="row__name"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+        {{ with .Description }}<div class="row__note">{{ . }}</div>{{ end }}
+      </div>
+      <div class="row__meta">{{ .Date | time.Format "2006-01-02" }}</div>
+    </div>
+    {{ else }}
+    <p class="empty">Nothing published yet.</p>
+    {{ end }}
+  </section>
+</main>
+
+<nav class="status">
+  <span class="status__session">noam</span>
+  <a class="status__win" href="/">0:home</a>
+  <a class="status__win is-active" href="/posts/">1:writing</a>
+  <span class="status__right"><span>israel</span></span>
+</nav>
+{{ end }}

@@ -1,0 +1,17 @@
+baseURL = "https://noam.stole.ro/"
+locale = "en-us"
+title = "Noam Stolero"
+enableRobotsTXT = true
+
+# no tags or categories on a personal site; skip the taxonomy templates entirely
+disableKinds = ["taxonomy", "term"]
+
+[markup.highlight]
+noClasses = false
+style = "nord"
+
+[params]
+description = "Software engineer. Go, Nix, and terminal tooling."
+email = "noam@stole.ro"
+github = "https://github.com/noamsto"
+linkedin = "https://linkedin.com/in/noam-sto"

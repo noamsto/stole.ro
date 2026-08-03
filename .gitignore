@@ -1,0 +1,9 @@
+result
+result-*
+.direnv
+.claude/settings.local.json
+public/
+resources/
+.hugo_build.lock
+node_modules/
+.wrangler/

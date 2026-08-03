@@ -1,0 +1,199 @@
+{{ define "main" }}
+<main class="grid">
+
+  <section class="pane" id="about" tabindex="0">
+    <h2 class="pane__title">about</h2>
+    <h1>noam stolero</h1>
+    <div class="tag">go · nix · terminal tooling</div>
+    <p>I build developer tooling. Mostly Go, mostly for the terminal, all of it
+       packaged with Nix so it behaves the same on every machine I own.</p>
+    <p>Most of what I publish started because I wanted it on my own machine and
+       it didn't exist yet.</p>
+    <p class="hint desktop-only" style="margin-top:1.2rem">
+      <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> move ·
+      <kbd>1</kbd>–<kbd>5</kbd> jump · <kbd>?</kbd> help
+    </p>
+  </section>
+
+  <section class="pane" id="work" tabindex="0">
+    <h2 class="pane__title">work</h2>
+    <div class="row">
+      <div class="row__main">
+        <div class="row__name">Factify</div>
+        <div class="row__note">Senior software engineer · first engineer after the VP R&amp;D</div>
+      </div>
+      <div class="row__meta">2024 —</div>
+    </div>
+    <div class="row">
+      <div class="row__main">
+        <div class="row__name">Barracuda Networks</div>
+        <div class="row__note">Senior Python backend engineer</div>
+      </div>
+      <div class="row__meta">2021 – 2024</div>
+    </div>
+    <div class="row">
+      <div class="row__main">
+        <div class="row__name">Nvidia</div>
+        <div class="row__note">Networking performance</div>
+      </div>
+      <div class="row__meta">2017 – 2021</div>
+    </div>
+  </section>
+
+  <section class="pane" id="writing" tabindex="0">
+    <h2 class="pane__title">writing</h2>
+    {{ range first 4 (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+    <div class="row">
+      <div class="row__main">
+        <div class="row__name"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+      </div>
+      <div class="row__meta">{{ .Date | time.Format "2006-01-02" }}</div>
+    </div>
+    {{ else }}
+    <p class="empty">Nothing published yet.</p>
+    {{ end }}
+  </section>
+
+  <section class="pane" id="projects" tabindex="0">
+    <h2 class="pane__title">projects</h2>
+    <div class="row">
+      <div class="row__main">
+        <div class="row__name"><a href="https://github.com/noamsto/nix-amd-ai">nix-amd-ai</a></div>
+        <div class="row__note">AMD NPU inference stack for NixOS — XRT, XDNA, FastFlowLM, Lemonade</div>
+      </div>
+      <div class="row__meta"><span class="star">★</span> 55</div>
+    </div>
+    <div class="row">
+      <div class="row__main">
+        <div class="row__name"><a href="https://github.com/noamsto/resolved.nvim">resolved.nvim</a></div>
+        <div class="row__note">Finds stale issue and PR references, so workarounds get deleted</div>
+      </div>
+      <div class="row__meta"><span class="star">★</span> 33</div>
+    </div>
+    <div class="row">
+      <div class="row__main">
+        <div class="row__name"><a href="https://github.com/noamsto/aeye">aeye</a></div>
+        <div class="row__note">Terminal image carousel for coding agents — screenshots, renders, D2 diagrams</div>
+      </div>
+      <div class="row__meta"><span class="star">★</span> 9</div>
+    </div>
+    <div class="row">
+      <div class="row__main">
+        <div class="row__name"><a href="https://github.com/noamsto/lazytmux">lazytmux</a></div>
+        <div class="row__note">Opinionated tmux configuration with coding-agent integration</div>
+      </div>
+      <div class="row__meta"><span class="star">★</span> 4</div>
+    </div>
+    <div class="row">
+      <div class="row__main">
+        <div class="row__name"><a href="https://github.com/noamsto/tmux-remux">tmux-remux</a></div>
+        <div class="row__note">SQLite-backed tmux session persistence — replaces resurrect and continuum</div>
+      </div>
+      <div class="row__meta">go</div>
+    </div>
+    <div class="row">
+      <div class="row__main">
+        <div class="row__name"><a href="https://github.com/noamsto/prdash">prdash</a></div>
+        <div class="row__note">Bubble Tea dashboard for triaging PRs, worktree-first</div>
+      </div>
+      <div class="row__meta">go</div>
+    </div>
+    <div class="row">
+      <div class="row__main">
+        <div class="row__name"><a href="https://toddl.family">Toddl</a></div>
+        <div class="row__note">Family memory app for iOS and Android — shipped solo</div>
+      </div>
+      <div class="row__meta">app</div>
+    </div>
+  </section>
+
+  <section class="pane" id="contact" tabindex="0">
+    <h2 class="pane__title">contact</h2>
+    <div class="links">
+      <a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a>
+      <a href="{{ site.Params.github }}">github.com/noamsto</a>
+      <a href="{{ site.Params.linkedin }}">linkedin.com/in/noam-sto</a>
+    </div>
+  </section>
+
+</main>
+
+<nav class="status" aria-label="pane navigation">
+  <span class="status__session">noam</span>
+  <button class="status__win" data-target="about">1:about</button>
+  <button class="status__win" data-target="work">2:work</button>
+  <button class="status__win" data-target="writing">3:writing</button>
+  <button class="status__win" data-target="projects">4:projects</button>
+  <button class="status__win" data-target="contact">5:contact</button>
+  <span class="status__right">
+    <span class="desktop-only">? help</span>
+    <span>israel</span>
+  </span>
+</nav>
+
+<div class="help" id="help" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
+  <div class="help__box">
+    <h2>keys</h2>
+    <div class="help__row"><kbd>h</kbd> <kbd>j</kbd> <kbd>k</kbd> <kbd>l</kbd><span>move between panes</span></div>
+    <div class="help__row"><kbd>←</kbd> <kbd>↓</kbd> <kbd>↑</kbd> <kbd>→</kbd><span>same</span></div>
+    <div class="help__row"><kbd>1</kbd>–<kbd>5</kbd><span>jump to pane</span></div>
+    <div class="help__row"><kbd>?</kbd><span>toggle this</span></div>
+    <div class="help__row"><kbd>esc</kbd><span>close</span></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var order = ["about","work","writing","projects","contact"];
+  // spatial map mirrors the grid areas, not the DOM order
+  var move = {
+    about:    {l:"about",   r:"work",     u:"about",   d:"writing"},
+    work:     {l:"about",   r:"work",     u:"work",    d:"projects"},
+    writing:  {l:"writing", r:"projects", u:"about",   d:"contact"},
+    projects: {l:"writing", r:"projects", u:"work",    d:"projects"},
+    contact:  {l:"contact", r:"projects", u:"writing", d:"contact"}
+  };
+  var current = "about";
+  var help = document.getElementById("help");
+
+  function focus(id){
+    if(!move[id]) return;
+    current = id;
+    document.querySelectorAll(".pane").forEach(function(p){
+      p.classList.toggle("is-active", p.id === id);
+    });
+    document.querySelectorAll(".status__win").forEach(function(b){
+      b.classList.toggle("is-active", b.dataset.target === id);
+    });
+    var el = document.getElementById(id);
+    el.focus({preventScroll:true});
+    if(window.innerWidth <= 860) el.scrollIntoView({behavior:"smooth", block:"center"});
+  }
+
+  document.querySelectorAll(".status__win").forEach(function(b){
+    b.addEventListener("click", function(){ focus(b.dataset.target); });
+  });
+  document.querySelectorAll(".pane").forEach(function(p){
+    p.addEventListener("focus", function(){ focus(p.id); });
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target.tagName;
+    if(t === "INPUT" || t === "TEXTAREA") return;
+
+    if(e.key === "?"){ help.toggleAttribute("open"); e.preventDefault(); return; }
+    if(e.key === "Escape"){ help.removeAttribute("open"); return; }
+
+    var dir = {h:"l", ArrowLeft:"l", l:"r", ArrowRight:"r",
+               k:"u", ArrowUp:"u",   j:"d", ArrowDown:"d"}[e.key];
+    if(dir){ focus(move[current][dir]); e.preventDefault(); return; }
+
+    var n = parseInt(e.key, 10);
+    if(n >= 1 && n <= order.length){ focus(order[n-1]); e.preventDefault(); }
+  });
+
+  focus("about");
+})();
+</script>
+{{ end }}

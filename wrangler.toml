@@ -1,0 +1,8 @@
+name = "stole-ro"
+compatibility_date = "2026-08-03"
+
+# Assets-only Worker: no `main`, so no `binding` either — that is only valid
+# alongside a Worker script.
+[assets]
+directory = "./public"
+not_found_handling = "404-page"
