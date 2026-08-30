@@ -213,7 +213,7 @@
   document.querySelectorAll(".star__count").forEach(function(el){
     var link = el.closest(".row").querySelector(".row__name a");
     fetch("https://api.github.com/repos" + new URL(link.href).pathname)
-      .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
       .then(function(repo){ el.textContent = repo.stargazers_count; })
       // rate limited, offline, or renamed repo: the rendered count stands
       .catch(function(){});
