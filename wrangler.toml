@@ -6,3 +6,9 @@ compatibility_date = "2026-08-03"
 [assets]
 directory = "./public"
 not_found_handling = "404-page"
+
+# Creates the custom domain and its DNS record on deploy, so noam.stole.ro
+# needs no dashboard step. Requires the hostname to have no existing CNAME.
+[[routes]]
+pattern = "noam.stole.ro"
+custom_domain = true
