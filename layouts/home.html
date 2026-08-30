@@ -3,116 +3,127 @@
 
   <section class="pane" id="about" tabindex="0">
     <h2 class="pane__title">about</h2>
-    <h1>noam stolero</h1>
-    <div class="tag">go · nix · terminal tooling</div>
-    <p>I build developer tooling. Mostly Go, mostly for the terminal, all of it
-       packaged with Nix so it behaves the same on every machine I own.</p>
-    <p>Most of what I publish started because I wanted it on my own machine and
-       it didn't exist yet.</p>
-    <p class="hint desktop-only" style="margin-top:1.2rem">
-      <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> move ·
-      <kbd>1</kbd>–<kbd>5</kbd> jump · <kbd>?</kbd> help
-    </p>
+    <div class="pane__body">
+      <h1>noam stolero</h1>
+      <div class="tag">go · nix · terminal tooling</div>
+      <p>I build developer tooling. Mostly Go, mostly for the terminal, all of it
+         packaged with Nix so it behaves the same on every machine I own.</p>
+      <p>Most of what I publish started because I wanted it on my own machine and
+         it didn't exist yet.</p>
+      <p class="hint desktop-only" style="margin-top:1.2rem">
+        <kbd>h</kbd><kbd>j</kbd><kbd>k</kbd><kbd>l</kbd> move ·
+        <kbd>1</kbd>–<kbd>5</kbd> jump · <kbd>?</kbd> help
+      </p>
+    </div>
   </section>
 
   <section class="pane" id="work" tabindex="0">
     <h2 class="pane__title">work</h2>
-    <div class="row">
-      <div class="row__main">
-        <div class="row__name">Factify</div>
-        <div class="row__note">Senior software engineer · first engineer after the VP R&amp;D</div>
+    <div class="pane__body">
+      <div class="row">
+        <div class="row__main">
+          <div class="row__name">Factify</div>
+          <div class="row__note">Senior software engineer · first engineer after the VP R&amp;D</div>
+        </div>
+        <div class="row__meta">2024 —</div>
       </div>
-      <div class="row__meta">2024 —</div>
-    </div>
-    <div class="row">
-      <div class="row__main">
-        <div class="row__name">Barracuda Networks</div>
-        <div class="row__note">Senior Python backend engineer</div>
+      <div class="row">
+        <div class="row__main">
+          <div class="row__name">Barracuda Networks</div>
+          <div class="row__note">Senior Python backend engineer</div>
+        </div>
+        <div class="row__meta">2021 – 2024</div>
       </div>
-      <div class="row__meta">2021 – 2024</div>
-    </div>
-    <div class="row">
-      <div class="row__main">
-        <div class="row__name">Nvidia</div>
-        <div class="row__note">Networking performance</div>
+      <div class="row">
+        <div class="row__main">
+          <div class="row__name">Nvidia</div>
+          <div class="row__note">Networking performance</div>
+        </div>
+        <div class="row__meta">2017 – 2021</div>
       </div>
-      <div class="row__meta">2017 – 2021</div>
     </div>
   </section>
 
   <section class="pane" id="writing" tabindex="0">
     <h2 class="pane__title">writing</h2>
-    {{ range first 4 (where site.RegularPages "Section" "posts").ByDate.Reverse }}
-    <div class="row">
-      <div class="row__main">
-        <div class="row__name"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+    <div class="pane__body">
+      {{ range first 4 (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+      <div class="row">
+        <div class="row__main">
+          <div class="row__name"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+        </div>
+        <div class="row__meta">{{ .Date | time.Format "2006-01-02" }}</div>
       </div>
-      <div class="row__meta">{{ .Date | time.Format "2006-01-02" }}</div>
+      {{ else }}
+      <p class="empty">Nothing published yet.</p>
+      {{ end }}
     </div>
-    {{ else }}
-    <p class="empty">Nothing published yet.</p>
-    {{ end }}
   </section>
 
   <section class="pane" id="projects" tabindex="0">
     <h2 class="pane__title">projects</h2>
-    <div class="row">
-      <div class="row__main">
-        <div class="row__name"><a href="https://github.com/noamsto/nix-amd-ai">nix-amd-ai</a></div>
-        <div class="row__note">AMD NPU inference stack for NixOS — XRT, XDNA, FastFlowLM, Lemonade</div>
+    <div class="pane__body">
+      <div class="row">
+        <div class="row__main">
+          <div class="row__name"><a href="https://github.com/noamsto/nix-amd-ai">nix-amd-ai</a></div>
+          <div class="row__note">AMD NPU inference stack for NixOS — XRT, XDNA, FastFlowLM, Lemonade</div>
+        </div>
+        <div class="row__meta"><span class="star">★</span> 55</div>
       </div>
-      <div class="row__meta"><span class="star">★</span> 55</div>
-    </div>
-    <div class="row">
-      <div class="row__main">
-        <div class="row__name"><a href="https://github.com/noamsto/resolved.nvim">resolved.nvim</a></div>
-        <div class="row__note">Finds stale issue and PR references, so workarounds get deleted</div>
+      <div class="row">
+        <div class="row__main">
+          <div class="row__name"><a href="https://github.com/noamsto/resolved.nvim">resolved.nvim</a></div>
+          <div class="row__note">Finds stale issue and PR references, so workarounds get deleted</div>
+        </div>
+        <div class="row__meta"><span class="star">★</span> 33</div>
       </div>
-      <div class="row__meta"><span class="star">★</span> 33</div>
-    </div>
-    <div class="row">
-      <div class="row__main">
-        <div class="row__name"><a href="https://github.com/noamsto/aeye">aeye</a></div>
-        <div class="row__note">Terminal image carousel for coding agents — screenshots, renders, D2 diagrams</div>
+      <div class="row">
+        <div class="row__main">
+          <div class="row__name"><a href="https://github.com/noamsto/aeye">aeye</a></div>
+          <div class="row__note">Terminal image carousel for coding agents — screenshots, renders, D2 diagrams</div>
+        </div>
+        <div class="row__meta"><span class="star">★</span> 9</div>
       </div>
-      <div class="row__meta"><span class="star">★</span> 9</div>
-    </div>
-    <div class="row">
-      <div class="row__main">
-        <div class="row__name"><a href="https://github.com/noamsto/lazytmux">lazytmux</a></div>
-        <div class="row__note">Opinionated tmux configuration with coding-agent integration</div>
+      <div class="row">
+        <div class="row__main">
+          <div class="row__name"><a href="https://github.com/noamsto/lazytmux">lazytmux</a></div>
+          <div class="row__note">Opinionated tmux configuration with coding-agent integration</div>
+        </div>
+        <div class="row__meta"><span class="star">★</span> 4</div>
       </div>
-      <div class="row__meta"><span class="star">★</span> 4</div>
-    </div>
-    <div class="row">
-      <div class="row__main">
-        <div class="row__name"><a href="https://github.com/noamsto/tmux-remux">tmux-remux</a></div>
-        <div class="row__note">SQLite-backed tmux session persistence — replaces resurrect and continuum</div>
+      <div class="row">
+        <div class="row__main">
+          <div class="row__name"><a href="https://github.com/noamsto/tmux-remux">tmux-remux</a></div>
+          <div class="row__note">SQLite-backed tmux session persistence — replaces resurrect and continuum</div>
+        </div>
+        <div class="row__meta">go</div>
       </div>
-      <div class="row__meta">go</div>
-    </div>
-    <div class="row">
-      <div class="row__main">
-        <div class="row__name"><a href="https://github.com/noamsto/prdash">prdash</a></div>
-        <div class="row__note">Bubble Tea dashboard for triaging PRs, worktree-first</div>
+      <div class="row">
+        <div class="row__main">
+          <div class="row__name"><a href="https://github.com/noamsto/prdash">prdash</a></div>
+          <div class="row__note">Bubble Tea dashboard for triaging PRs, worktree-first</div>
+        </div>
+        <div class="row__meta">go</div>
       </div>
-      <div class="row__meta">go</div>
-    </div>
-    <div class="row">
-      <div class="row__main">
-        <div class="row__name"><a href="https://toddl.family">Toddl</a></div>
-        <div class="row__note">Family memory app for iOS and Android — shipped solo</div>
+      <div class="row">
+        <div class="row__main">
+          <div class="row__name"><a href="https://toddl.family">Toddl</a></div>
+          <div class="row__note">Family memory app for iOS and Android — shipped solo</div>
+        </div>
+        <div class="row__meta">app</div>
       </div>
-      <div class="row__meta">app</div>
+      <p class="more"><a href="{{ site.Params.github }}">more on github →</a></p>
     </div>
   </section>
 
   <section class="pane" id="contact" tabindex="0">
     <h2 class="pane__title">contact</h2>
-    <div class="links">
-      <a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a>
-      <a href="{{ site.Params.github }}">github.com/noamsto</a>
-      <a href="{{ site.Params.linkedin }}">linkedin.com/in/noam-sto</a>
+    <div class="pane__body">
+      <div class="links">
+        <a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a>
+        <a href="{{ site.Params.github }}">github.com/noamsto</a>
+        <a href="{{ site.Params.linkedin }}">linkedin.com/in/noam-sto</a>
+      </div>
     </div>
   </section>
 
