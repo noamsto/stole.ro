@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0f1117"/>
+
+  <!-- pane monogram, same geometry as the favicon and the CV avatar -->
+  <g transform="translate(29.45,106.55) scale(0.55)">
+    <rect x="121" y="119" width="176" height="424" fill="#9d8ff0"/>
+    <rect x="322" y="119" width="223" height="201" fill="#646f94"/>
+    <rect x="322" y="344" width="223" height="201" fill="#646f94"/>
+  </g>
+
+  <text x="390" y="250" font-family="IBM Plex Mono" font-size="72" font-weight="500"
+        letter-spacing="6" fill="#dcd7cc">Noam Stolero</text>
+  <text x="392" y="308" font-family="IBM Plex Mono" font-size="23" font-weight="400"
+        letter-spacing="1" fill="#9198ab">Software engineer. Go, Nix, and terminal tooling.</text>
+  <text x="392" y="366" font-family="IBM Plex Mono" font-size="26" font-weight="400"
+        letter-spacing="1" fill="#9d8ff0">noam.stole.ro</text>
+
+  <!-- tmux status bar, mirroring layouts/home.html -->
+  <rect x="0" y="574" width="1200" height="56" fill="#13161f"/>
+  <rect x="0" y="574" width="1200" height="1" fill="#242938"/>
+
+  <rect x="0" y="575" width="118" height="55" fill="#9d8ff0"/>
+  <text x="59" y="610" font-family="IBM Plex Mono" font-size="23" font-weight="500"
+        fill="#0b0d12" text-anchor="middle">noam</text>
+
+  <rect x="140" y="575" width="132" height="55" fill="#1b2030"/>
+  <text x="206" y="610" font-family="IBM Plex Mono" font-size="23" fill="#9d8ff0"
+        text-anchor="middle">1:about</text>
+
+  <text x="300" y="610" font-family="IBM Plex Mono" font-size="23" fill="#9198ab">2:work</text>
+  <text x="430" y="610" font-family="IBM Plex Mono" font-size="23" fill="#9198ab">3:writing</text>
+  <text x="590" y="610" font-family="IBM Plex Mono" font-size="23" fill="#9198ab">4:projects</text>
+  <text x="770" y="610" font-family="IBM Plex Mono" font-size="23" fill="#9198ab">5:contact</text>
+
+  <text x="1170" y="610" font-family="IBM Plex Mono" font-size="23" fill="#7b8397"
+        text-anchor="end">israel</text>
+</svg>
