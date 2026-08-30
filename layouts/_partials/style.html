@@ -39,7 +39,11 @@ body::after{
     "writing projects"
     "contact projects";
   grid-template-rows:auto 1fr auto;
-  min-height:calc(100vh - var(--bar) - 2.2rem);
+  /* exactly the viewport, so the frame never scrolls; panes scroll inside,
+     the way tmux panes do. dvh keeps it honest under mobile browser chrome. */
+  height:calc(100vh - var(--bar) - 2.2rem);
+  height:calc(100dvh - var(--bar) - 2.2rem);
+  min-height:0;
   max-width:1180px;margin:0 auto;
 }
 #about{grid-area:about}
@@ -51,6 +55,7 @@ body::after{
 .pane{
   position:relative;border:1px solid var(--line);background:var(--pane);
   padding:1.35rem 1.5rem 1.4rem;outline:none;
+  display:flex;flex-direction:column;min-height:0;
   transition:border-color .18s ease,background .18s ease;
   opacity:0;animation:rise .5s cubic-bezier(.2,.7,.3,1) forwards;
 }
@@ -60,6 +65,17 @@ body::after{
 .pane:nth-child(4){animation-delay:.23s}
 .pane:nth-child(5){animation-delay:.29s}
 @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* min-height:0 is load-bearing: a flex/grid child defaults to min-height:auto,
+   which refuses to shrink below its content and so never scrolls. */
+.pane__body{flex:1;min-height:0;overflow-y:auto;
+  scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.pane__body::-webkit-scrollbar{width:6px}
+.pane__body::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+
+.more{margin-top:1rem;font-size:.82rem;color:var(--faint)}
+.more a{color:var(--faint)}
+.more a:hover{color:var(--active)}
 
 .pane__title{
   position:absolute;top:-.72em;left:1.15rem;padding:0 .55rem;background:var(--bg);
@@ -141,10 +157,19 @@ kbd{color:var(--fg);background:#1b2030;border:1px solid var(--line);border-radiu
 
 @media (max-width:860px){
   .grid{grid-template-columns:1fr;grid-template-rows:none;
-    grid-template-areas:"about" "work" "writing" "projects" "contact";min-height:0}
+    grid-template-areas:"about" "work" "writing" "projects" "contact";
+    height:auto;min-height:0}
+  .pane__body{overflow:visible}
   .desktop-only{display:none}
   .row{grid-template-columns:1fr}
   .row__meta{text-align:left}
+}
+/* Too short to hold five panes without squeezing some into slivers — give up
+   the one-screen conceit and let the page flow instead. 640px clears the
+   common 1366x768 laptop, which keeps the fitted layout. */
+@media (min-width:861px) and (max-height:640px){
+  .grid{height:auto}
+  .pane__body{overflow:visible}
 }
 @media (prefers-reduced-motion:reduce){
   .pane{animation:none;opacity:1}
