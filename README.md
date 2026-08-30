@@ -31,6 +31,8 @@ wrangler deploy
 | `layouts/section.html` | the post index |
 | `layouts/_partials/style.html` | all CSS |
 | `static/fonts/` | IBM Plex Mono subset, self-hosted |
+| `assets/og.svg` | source for the link-preview card |
+| `static/og.png` | rendered 1200x630 card |
 | `content/posts/` | markdown posts |
 
 The home page is a terminal-multiplexer layout: panes with a tmux-style status
@@ -58,3 +60,25 @@ nix shell --impure --expr 'with import <nixpkgs> {}; python3.withPackages (ps: [
 No italic face: the only italic text is one line of mono, where a synthesized
 oblique is fine. `--prose` (IBM Plex Serif) is not self-hosted either — it
 applies only to posts, and Georgia is a good fallback until there are some.
+
+## Link previews
+
+`assets/og.svg` is the source for the Open Graph card that WhatsApp, Slack and
+friends render when the link is pasted. It reuses the pane monogram and the
+tmux status bar, so the preview looks like the site.
+
+Re-render after editing the SVG:
+
+```sh
+d=$(nix build --no-link --print-out-paths nixpkgs#ibm-plex)/share/fonts/opentype
+resvg --skip-system-fonts \
+  --use-font-file "$d/IBMPlexMono-Regular.otf" \
+  --use-font-file "$d/IBMPlexMono-Medium.otf" \
+  -w 1200 -h 630 assets/og.svg static/og.png
+```
+
+`--skip-system-fonts` is load-bearing: without it resvg silently substitutes
+whatever the host has, and the card renders differently on another machine.
+
+WhatsApp caches previews hard. To see a change, paste the URL with a throwaway
+query string (`?v=2`) rather than waiting for the cache to expire.
