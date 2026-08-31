@@ -68,28 +68,28 @@
           <div class="row__name"><a href="https://github.com/noamsto/nix-amd-ai">nix-amd-ai</a></div>
           <div class="row__note">AMD NPU inference stack for NixOS — XRT, XDNA, FastFlowLM, Lemonade</div>
         </div>
-        <div class="row__meta"><span class="star">★</span> 55</div>
+        <div class="row__meta"><span class="star">★</span> <span class="star__count">65</span></div>
       </div>
       <div class="row">
         <div class="row__main">
           <div class="row__name"><a href="https://github.com/noamsto/resolved.nvim">resolved.nvim</a></div>
           <div class="row__note">Finds stale issue and PR references, so workarounds get deleted</div>
         </div>
-        <div class="row__meta"><span class="star">★</span> 33</div>
+        <div class="row__meta"><span class="star">★</span> <span class="star__count">33</span></div>
       </div>
       <div class="row">
         <div class="row__main">
           <div class="row__name"><a href="https://github.com/noamsto/aeye">aeye</a></div>
           <div class="row__note">Terminal image carousel for coding agents — screenshots, renders, D2 diagrams</div>
         </div>
-        <div class="row__meta"><span class="star">★</span> 9</div>
+        <div class="row__meta"><span class="star">★</span> <span class="star__count">9</span></div>
       </div>
       <div class="row">
         <div class="row__main">
           <div class="row__name"><a href="https://github.com/noamsto/lazytmux">lazytmux</a></div>
           <div class="row__note">Opinionated tmux configuration with coding-agent integration</div>
         </div>
-        <div class="row__meta"><span class="star">★</span> 4</div>
+        <div class="row__meta"><span class="star">★</span> <span class="star__count">4</span></div>
       </div>
       <div class="row">
         <div class="row__main">
@@ -207,6 +207,17 @@
   });
 
   focus("about");
+})();
+
+(function(){
+  document.querySelectorAll(".star__count").forEach(function(el){
+    var link = el.closest(".row").querySelector(".row__name a");
+    fetch("https://api.github.com/repos" + new URL(link.href).pathname)
+      .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
+      .then(function(repo){ el.textContent = repo.stargazers_count; })
+      // rate limited, offline, or renamed repo: the rendered count stands
+      .catch(function(){});
+  });
 })();
 </script>
 {{ end }}
