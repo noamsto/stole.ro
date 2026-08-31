@@ -18,6 +18,9 @@
   --mono:"Berkeley Mono","IBM Plex Mono","JetBrains Mono","SFMono-Regular",Menlo,ui-monospace,monospace;
   --prose:"IBM Plex Serif",Georgia,ui-serif,serif;
   --bar:1.9rem;
+  /* the terminal's width: the grid and the status bar both use it, so they
+     cannot drift apart */
+  --wrap:1180px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -44,7 +47,7 @@ body::after{
   height:calc(100vh - var(--bar) - 2.2rem);
   height:calc(100dvh - var(--bar) - 2.2rem);
   min-height:0;
-  max-width:1180px;margin:0 auto;
+  max-width:var(--wrap);margin:0 auto;
 }
 #about{grid-area:about}
 #work{grid-area:work}
@@ -88,7 +91,7 @@ body::after{
 h1{font-size:clamp(1.5rem,4.4vw,2.1rem);font-weight:500;letter-spacing:.2em;
    text-transform:lowercase;line-height:1.15;margin-bottom:.15rem}
 .tag{color:var(--amber);font-size:.85rem;letter-spacing:.1em;margin-bottom:1.1rem}
-p{color:var(--dim);max-width:46ch}
+p{color:var(--dim);max-width:58ch}
 p+p{margin-top:.8rem}
 
 .row{display:grid;grid-template-columns:1fr auto;gap:.6rem 1rem;
@@ -109,8 +112,12 @@ a:focus-visible{outline:1px solid var(--active);outline-offset:3px}
 
 .status{
   position:fixed;left:0;right:0;bottom:0;height:var(--bar);z-index:50;
-  display:flex;align-items:center;background:#0b0d12;border-top:1px solid var(--line);
-  font-size:.79rem;padding:0 .75rem;color:var(--dim);
+  display:flex;justify-content:center;padding:0 1.1rem;
+}
+.status__inner{
+  flex:1;max-width:var(--wrap);display:flex;align-items:center;
+  background:#0b0d12;border-top:1px solid var(--line);
+  font-size:.79rem;color:var(--dim);
 }
 .status__session{background:var(--active);color:#0b0d12;padding:0 .7rem;height:100%;
   display:flex;align-items:center;font-weight:500;letter-spacing:.06em}
@@ -119,7 +126,7 @@ a:focus-visible{outline:1px solid var(--active);outline-offset:3px}
   text-decoration:none;border-bottom:0}
 .status__win:hover{color:var(--fg)}
 .status__win.is-active{background:#1b2030;color:var(--active)}
-.status__right{margin-left:auto;color:var(--faint);display:flex;gap:1.1rem;padding-right:.3rem}
+.status__right{margin-left:auto;color:var(--faint);display:flex;gap:1.1rem;padding-right:.75rem}
 .hint{color:var(--faint)}
 kbd{color:var(--fg);background:#1b2030;border:1px solid var(--line);border-radius:3px;
     padding:0 .3em;font:inherit;font-size:.92em}
@@ -155,11 +162,21 @@ kbd{color:var(--fg);background:#1b2030;border:1px solid var(--line);border-radiu
 .post__title{font-family:var(--mono);font-size:1.5rem;font-weight:500;
   letter-spacing:.02em;text-transform:none;color:var(--fg);margin-bottom:.2rem}
 
+/* Desktop monitors have room the 1180px column was leaving empty; laptops
+   already fill it, so they keep it. */
+@media (min-width:1500px){
+  :root{--wrap:1460px}
+}
 @media (max-width:860px){
   .grid{grid-template-columns:1fr;grid-template-rows:none;
     grid-template-areas:"about" "work" "writing" "projects" "contact";
     height:auto;min-height:0}
   .pane__body{overflow:visible}
+  /* six labels never fit a phone; keep the session block anchored left and let
+     the rest scroll, rather than centring the overflow off both edges */
+  .status{justify-content:flex-start}
+  .status__inner{overflow-x:auto;scrollbar-width:none}
+  .status__inner::-webkit-scrollbar{display:none}
   .desktop-only{display:none}
   .row{grid-template-columns:1fr}
   .row__meta{text-align:left}
